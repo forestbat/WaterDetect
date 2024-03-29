@@ -28,14 +28,15 @@ def main():
     parser.add_argument("-GC", "--GetConfig", help="Copy the WaterDetect.ini from the package into the current "
                                                    "directory and skips the processing. Once copied you can edit the "
                                                    ".ini file and launch the waterdetect without -c option.",
-                        action="store_true")
-    parser.add_argument("-i", "--input", help="The products input folder. Required.", required=False, type=str)
-    parser.add_argument("-o", "--out", help="Output directory. Required.", required=False, type=str)
+                        action="store_true", default=False)
+    parser.add_argument("-i", "--input", help="The products input folder. Required.",
+                        required=False, type=str, default=r'C:\Users\Administrator\.hydrodataset\Hundred-Reservoirs-RemoteData\GF_clipped')
+    parser.add_argument("-o", "--out", help="Output directory. Required.", required=False, type=str, default='wd_output')
     parser.add_argument("-s", "--shp", help="SHP file. Optional.", type=str)
     parser.add_argument("-sm", "--single", help="Run WaterDetect over only one image instead of a directory of images. "
-                                                "Optional.", action='store_true')
+                                                "Optional.", action='store_true', default=False)
     parser.add_argument("-p", "--product", help='The product to be processed (S2_THEIA, L8_USGS, S2_L1C or S2_S2COR)',
-                        default='S2_THEIA', type=str)
+                        default='GF1', type=str)
     parser.add_argument("-pk", "--pekel", help='Optional path for an occurrence base map like Pekel',
                         required=False, type=str)
     parser.add_argument('-c', '--config', help='Configuration .ini file. If not specified WaterDetect.ini '

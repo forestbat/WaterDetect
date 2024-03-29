@@ -1,3 +1,4 @@
+import glob
 import os
 from shutil import copy
 import configparser
@@ -450,7 +451,8 @@ class DWutils:
         :param input_folder: folder that stores the images
         :return: list of images (i.e. directories)
         """
-        return [i for i in input_folder.iterdir() if i.is_dir()]
+        # return [i for i in input_folder.iterdir() if i.is_dir()]
+        return glob.glob(f'{input_folder}/*.tif', recursive=True)
 
     @staticmethod
     def calc_normalized_difference(img1, img2, mask=None, compress_cte=0.02):

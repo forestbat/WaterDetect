@@ -1,4 +1,5 @@
 import os
+import pathlib
 import sys
 import numpy as np
 from pathlib import Path
@@ -35,7 +36,8 @@ class DWLoader:
 
         'L8_L1C': {'bands_names': {'Aero': 'band1', 'Blue': 'band2', 'Green': 'band3', 'Red': 'band4',
                                    'Mir': 'band6', 'Nir': 'band5', 'Mir2': 'band7'},
-                   'suffix': '.tif', 'string': 'sr_band', 'recursive': False}
+                   'suffix': '.tif', 'string': 'sr_band', 'recursive': False},
+        'GF1': {'bands_names': {'Blue': 'Band 1', 'Green': 'Band 2', 'Red': 'Band 3', 'Nir': 'Band 4'}, 'suffix':'.tif', 'recursive': True},
     }
 
     band_ids = {'Blue': 1, 'Green': 2, 'Red': 3, 'RedEdg1': 4, 'RedEdg2': 5, 'RedEdg3': 6, 'Nir': 7, 'Nir2': 8,
@@ -218,7 +220,7 @@ class DWLoader:
             bands = [file for file in self.bands_path.iterdir() if file.suffix == self.product_dict['suffix']
                      and self.product_dict['string'] in file.stem]
         else:
-            bands = [file for file in self.bands_path.rglob(f"*{self.product_dict['suffix']}")]
+            bands = [file for file in pathlib.Path(self.bands_path).parent.rglob(f"*{self.product_dict['suffix']}")]
 
         if bands:
             print(f'{len(bands)} were found:')
